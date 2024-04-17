@@ -18,11 +18,11 @@ class Personnage extends Group {
     }
 
     public void deplacerAGauche() {
-        //    ****
+        //
         //   *    *
         //  *---   *
         //   *    *
-        //    ****
+        //
 
         //déplacement <----
         if (getLayoutX() >= LARGEUR_PERSONNAGE) {
@@ -34,13 +34,13 @@ class Personnage extends Group {
     }
 
     public void deplacerADroite(double largeurJeu) {
-        //    ****
+        //
         //   *    *
         //  *   ---*
         //   *    *
-        //    ****
+        //
         //déplacement ---->
-        if (getLayoutX() < largeurJeu - LARGEUR_PERSONNAGE) {
+        if (getLayoutX() < largeurJeu - LARGEUR_PERSONNAGE - 20) {
             setLayoutX(getLayoutX() + LARGEUR_PERSONNAGE);
         }
         if (!direction.equals("droite")) {
@@ -49,26 +49,39 @@ class Personnage extends Group {
     }
 
     public void deplacerEnBas(double hauteurJeu) {
-        //    *****
+        //    *
         //   *     *
         //  *   |   *
         //   *  |  *
-        //    *****
-
+        //
+        if (getLayoutY() < hauteurJeu - LARGEUR_PERSONNAGE - 20) {
+            setLayoutY(getLayoutY() + LARGEUR_PERSONNAGE);
+        }
+        if (!direction.equals("bas")) {
+            direction = "bas";
+        }
     }
 
     public void deplacerEnHaut() {
-        //    *****
+        //
         //   *  |  *
         //  *   |   *
         //   *     *
-        //    *****
-
+        //    *
+        if (getLayoutY() >= LARGEUR_PERSONNAGE) {
+            setLayoutY(getLayoutY() - LARGEUR_PERSONNAGE);
+        }
+        if (!direction.equals("haut")) {
+            direction = "Haut";
+        }
     }
 
     boolean estEnCollision(Personnage autrePersonnage) {
         return getBoundsInParent().contains(autrePersonnage.getBoundsInParent())
                 || autrePersonnage.getBoundsInParent().contains(getBoundsInParent());
+    }
+    public boolean estEnCollisionObstacle(Personnage Obstacle) {
+        return getBoundsInParent().intersects(Obstacle.getBoundsInParent());
     }
 
 }
