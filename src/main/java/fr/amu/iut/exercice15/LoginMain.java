@@ -1,4 +1,4 @@
-package fr.amu.iut.exercice5;
+package fr.amu.iut.exercice15;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

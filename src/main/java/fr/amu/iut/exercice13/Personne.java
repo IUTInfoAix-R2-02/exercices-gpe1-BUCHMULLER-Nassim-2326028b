@@ -1,5 +1,6 @@
-package fr.amu.iut.exercice3;
+package fr.amu.iut.exercice13;
 
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -13,6 +14,10 @@ public class Personne {
         this.nom = nom;
         this.age = age;
         this.villeDeNaissance = new SimpleStringProperty("Paris");
+
+        // Ajout d'un écouteur pour réagir aux modifications de l'âge
+        this.villeDeNaissance.addListener((obs, oldAge, newAge) ->
+                System.out.println(this.nom + " a maintenant " + newAge + " ans"));
     }
 
     public String getNom() {
@@ -21,10 +26,14 @@ public class Personne {
 
     public void setAge(int age) {
         this.age = age;
+        this.villeDeNaissance.set(String.valueOf(age));
     }
 
     public int getAge() {
         return age;
     }
 
+    public Observable ageProperty() {
+        return villeDeNaissance;
+    }
 }

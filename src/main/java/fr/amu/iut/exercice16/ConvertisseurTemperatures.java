@@ -1,4 +1,4 @@
-package fr.amu.iut.exercice6;
+package fr.amu.iut.exercice16;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
