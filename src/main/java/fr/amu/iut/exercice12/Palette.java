@@ -1,6 +1,8 @@
-package fr.amu.iut.exercice2;
+package fr.amu.iut.exercice12;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -39,16 +41,16 @@ public class Palette extends Application {
         root = new BorderPane();
 
         texteDuHaut = new Label();
-        texteDuHaut.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
+        texteDuHaut.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         BorderPane.setAlignment(texteDuHaut, Pos.CENTER);
         texteDuBas = new Label();
 
         panneau = new Pane();
-        panneau.setPrefSize(400,200);
+        panneau.setPrefSize(400, 200);
 
         boutons = new HBox(10);
         boutons.setAlignment(Pos.CENTER);
-        boutons.setPadding(new Insets(10,5,10,5));
+        boutons.setPadding(new Insets(10, 5, 10, 5));
 
         bas = new VBox();
         bas.getChildren().addAll(boutons, texteDuBas);
@@ -60,17 +62,30 @@ public class Palette extends Application {
 
         gestionnaireEvenement = (event) -> {
             sourceOfEvent = (CustomButton) event.getSource();
+            sourceOfEvent.incrementNbClics();
         };
 
         vert.setOnAction(gestionnaireEvenement);
         rouge.setOnAction(gestionnaireEvenement);
         bleu.setOnAction(gestionnaireEvenement);
 
+        ChangeListener<Number> nbClicsListener = (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+            if (sourceOfEvent != null) {
+                texteDuHaut.setText("Bouton cliqué: " + sourceOfEvent.getText());
+                panneau.setStyle("-fx-background-color: " + sourceOfEvent.getColor());
+                texteDuBas.setText("Nb clics: " + sourceOfEvent.getNbClics());
+            }
+        };
+
+        vert.nbClicsProperty().addListener(nbClicsListener);
+        rouge.nbClicsProperty().addListener(nbClicsListener);
+        bleu.nbClicsProperty().addListener(nbClicsListener);
+
         boutons.getChildren().addAll(vert, rouge, bleu);
 
         root.setCenter(panneau);
         root.setTop(texteDuHaut);
-        root.setBottom(boutons);
+        root.setBottom(bas);
 
         Scene scene = new Scene(root);
 
@@ -78,5 +93,7 @@ public class Palette extends Application {
         primaryStage.show();
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
-
