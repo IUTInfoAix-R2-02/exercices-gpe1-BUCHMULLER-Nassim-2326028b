@@ -17,11 +17,31 @@ public class Personne {
         this.villeDeNaissance = new SimpleStringProperty("Paris");
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public int getAge() {
+        return age.get();
+    }
+
     public void setAge(int age) {
         this.age.setValue(age);
     }
 
+    public IntegerProperty ageProperty() {
+        return age;
+    }
+
+    public String getVilleDeNaissance() {
+        return villeDeNaissance.get();
+    }
+
     public void setVilleDeNaissance(String ville) {
-        villeDeNaissance.setValue(ville);
+        this.villeDeNaissance.setValue(ville);
+    }
+
+    public StringProperty villeDeNaissanceProperty() {
+        return villeDeNaissance;
     }
 }
