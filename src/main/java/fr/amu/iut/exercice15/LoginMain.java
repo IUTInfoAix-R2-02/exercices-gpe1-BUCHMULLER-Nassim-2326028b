@@ -14,11 +14,11 @@ public class LoginMain extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("exercice5/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("exercice15/LoginView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-        stage.setTitle("FXML Custom Control");
+        stage.setTitle("Connexion");
         stage.show();
     }
 }
