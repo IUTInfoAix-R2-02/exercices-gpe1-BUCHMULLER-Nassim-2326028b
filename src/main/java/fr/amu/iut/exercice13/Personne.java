@@ -15,7 +15,6 @@ public class Personne {
         this.age = age;
         this.villeDeNaissance = new SimpleStringProperty("Paris");
 
-        // Ajout d'un écouteur pour réagir aux modifications de l'âge
         this.villeDeNaissance.addListener((obs, oldAge, newAge) ->
                 System.out.println(this.nom + " a maintenant " + newAge + " ans"));
     }
